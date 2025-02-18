@@ -1,93 +1,140 @@
 ![Build Status](https://img.shields.io/github/actions/workflow/status/username/repository/workflow.yml?branch=main)
 
-# Multi-Cloud-onboard
-This is a sample repo for multi cloud onboarding with Python on AWS ,Azure, GCP  
+# Multi-Cloud Onboarding
 
-(note whe creating this repo I use .gitignore file for Python is used to tell Git which files and directories to ignore in a Python project. This helps prevent unnecessary files (such as compiled files, virtual environments, or secrets) from being tracked in the repository.)
+This repository provides a sample setup for multi-cloud onboarding using Python across AWS, Azure, and GCP.
 
-Steps to follow 
+## Table of Contents
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Setup Instructions](#setup-instructions)
+  - [1. AWS Cloud Shell](#1-aws-cloud-shell)
+  - [2. Virtual Environment Setup](#2-virtual-environment-setup)
+  - [3. Project Scaffolding](#3-project-scaffolding)
+- [Makefile Commands](#makefile-commands)
+- [Running the Code](#running-the-code)
+- [Deploying to Other Clouds](#deploying-to-other-clouds)
 
-#1 AWS 
+---
 
-As AWS Cloud9 is not working and AWS suggest to use Cloud Shell so lets try it 
+## Overview
+This project demonstrates how to set up a simple Python application in a multi-cloud environment. It includes:
+- Creating an SSH key for GitHub access.
+- Setting up a Python virtual environment.
+- Basic project scaffolding with a `Makefile`.
+- Running linting and tests.
 
-Creating a SSH key so that all the Cloud services can connect to github 
+> **Note:** When creating this repository, a `.gitignore` file was added for Python. This ensures that unnecessary files (such as compiled files, virtual environments, or secrets) are not tracked in Git.
 
- Commad 
- ```bash
-ssh-keygen -t rsa 
+## Prerequisites
+- GitHub account with SSH key access.
+- AWS Cloud Shell (preferred over AWS Cloud9).
+- Python 3 installed.
+- Basic knowledge of Git and Python.
+
+## Setup Instructions
+
+### 1. AWS Cloud Shell
+AWS suggests using **Cloud Shell** instead of Cloud9. We will set up SSH authentication and clone the repository.
+
+#### Generate an SSH Key
+Run the following command in AWS Cloud Shell:
+```bash
+ssh-keygen -t rsa
 ```
-then after clicking 4 times it will generate the key 
-then cat the path in which it saves it in cloud shell 
-copy the output and add it in your github account settings/SSH_and_GPG_keys New key
-
-in cloud shell to get the repo so that we can edit and test in cloud our code 
+Press **Enter** four times to accept the default settings. Then, retrieve the generated key:
+```bash
+cat ~/.ssh/id_rsa.pub
 ```
-git clone git@github.com:myronmzd/Multi-Cloud-onboard.git
+Copy the output and add it to your GitHub account under:
+**Settings > SSH and GPG Keys > New Key**.
+
+#### Clone the Repository
+After adding the SSH key, clone this repository:
+```bash
+git clone git@github.com:username/Multi-Cloud-onboard.git
+cd Multi-Cloud-onboard
 ```
 
-Now the List of thing to do in Cloud with this repor 
+### 2. Virtual Environment Setup
+To create a Python virtual environment:
+```bash
+# (Optional) Create a directory for virtual environments
+mkdir -p ~/venvs
+cd ~/venvs
 
-1. Create virtualenv
-2. Create scaffalting
+# Create and activate the virtual environment
+python3 -m venv ~/.Multi-Cloud-onboard
+source ~/.Multi-Cloud-onboard/bin/activate
 
+# Verify Python version and path
+python3 --version
+which python
+```
+Expected output:
+```bash
+(Multi-Cloud-onboard) $ which python
+~/Multi-Cloud-onboard/Multi-Cloud-onboard/bin/python
+```
 
-1. Creating a python enve and write a python program show that we can run this program in any cloud setup
-   ```sh
-   optional
-   mkdir -p ~/venvs
-   cd ~/venvs
-   
-   python3 -m venv ~/.Multi-Cloud-onboard
-   source ~/.Multi-Cloud-onboard/bin/activate
-   python3 --version
-   which python
-   ```
+### 3. Project Scaffolding
+Create necessary project files:
+```bash
+touch Makefile hello.py requirements.txt test_hello.py
+```
 
-   (Multi-Cloud-onboard) Multi-Cloud-onboard $ which python
-    ~/Multi-Cloud-onboard/Multi-Cloud-onboard/bin/python
-   
-3. Create scaffalting
-   
-   *Makefile
-   *hello.py (sourece code)
-   *requirements.txt
-   *test
+#### `Makefile`
+```makefile
+install:
+	pip install --upgrade pip &&\
+		pip install -r requirements.txt
 
-   ```sh
-   touch Makefile
-   touch hello.py
-   touch requirements.txt
-   touch test_hello.py 
-   ```
+lint:
+	pylint --disable=R,C hello.py
 
-   Makefile
-   ```
-    install:
-  	pip install --upgrade pip &&\
-  		pip install -r requirements.txt
+format:
+	black *.py
 
-    lint:
-      pylint --disable=R,C hello.py
-    
-    format:
-      black *.py
-    
-    test:
-      python -m pytest -vv --cov=hello test_hello.py
-    
-    deploy:
-      echo "CD"
-    all: install lint test
-   ```
+test:
+	python -m pytest -vv --cov=hello test_hello.py
 
-   hello.py
+deploy:
+	echo "CD"
 
-   ```
-   def add(x,y):
-    return x+y
-   print(add(6,6))
-   ```
-   after runing make install ,make lint , make test ,make deploy 
-   then you can use git commit to repo
-   and then switch to other clouds and try it there 
+all: install lint test
+```
+
+#### `hello.py`
+```python
+def add(x, y):
+    return x + y
+
+print(add(6, 6))
+```
+
+---
+
+## Makefile Commands
+Run the following commands to set up and test the project:
+```bash
+make install   # Install dependencies
+make lint      # Run linting
+make test      # Run tests
+make deploy    # Simulate deployment
+```
+
+## Running the Code
+After running `make install`, `make lint`, and `make test`, you can commit your changes and push them to GitHub:
+```bash
+git add .
+git commit -m "Initial setup for multi-cloud onboarding"
+git push origin main
+```
+
+## Deploying to Other Clouds
+Once the setup is complete on AWS, switch to Azure or GCP and repeat the process using their respective Cloud Shells.
+
+---
+
+This project ensures a seamless onboarding process for multi-cloud environments. Happy coding! 🚀
+
