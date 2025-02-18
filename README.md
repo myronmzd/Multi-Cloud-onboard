@@ -50,7 +50,14 @@ Now the List of thing to do in Cloud with this repor
    *Makefile
    *hello.py (sourece code)
    *requirements.txt
-   *test 
+   *test
+
+   ```sh
+   touch Makefile
+   touch hello.py
+   touch requirements.txt
+   touch test_hello.py 
+   ```
 
    Makefile
    ```
@@ -73,5 +80,12 @@ Now the List of thing to do in Cloud with this repor
    ```
 
    hello.py
-   
-   
+
+   ```
+   def add(x,y):
+    return x+y
+   print(add(6,6))
+   ```
+   after runing make install ,make lint , make test ,make deploy 
+   then you can use git commit to repo
+   and then switch to other clouds and try it there 
