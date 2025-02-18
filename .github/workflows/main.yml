@@ -1,0 +1,30 @@
+name: Python application test with GitHub Actions
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+        cache: 'pip'  # Caches dependencies for faster installs
+
+    - name: Install dependencies
+      run: make install
+
+    - name: Lint with pylint
+      run: make lint
+
+    - name: Test with pytest
+      run: make test
+
+    - name: Format code
+      run: make format
