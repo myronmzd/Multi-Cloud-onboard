@@ -37,7 +37,7 @@ Now the List of thing to do in Cloud with this repor
    cd ~/venvs
    
    python3 -m venv ~/.Multi-Cloud-onboard
-   source Multi-Cloud-onboard/bin/activate
+   source ~/.Multi-Cloud-onboard/bin/activate
    python3 --version
    which python
    ```
