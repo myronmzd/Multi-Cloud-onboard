@@ -1,3 +1,5 @@
+![Build Status](https://img.shields.io/github/actions/workflow/status/username/repository/workflow.yml?branch=main)
+
 # Multi-Cloud-onboard
 This is a sample repo for multi cloud onboarding with Python on AWS ,Azure, GCP  
 
