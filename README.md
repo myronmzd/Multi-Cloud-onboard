@@ -1,4 +1,4 @@
-![Build Status](https://img.shields.io/github/actions/workflow/status/username/repository/workflow.yml?branch=main)
+[![Python application test with GitHub Actions](https://github.com/myronmzd/Multi-Cloud-onboard/actions/workflows/main.yml/badge.svg)](https://github.com/myronmzd/Multi-Cloud-onboard/actions/workflows/main.yml)
 
 # Multi-Cloud Onboarding
 
